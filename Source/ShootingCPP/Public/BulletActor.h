@@ -22,5 +22,18 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UBoxComponent* BoxComp;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Speed = 1000.0f;
+
+	UFUNCTION()
+	void OnBulletOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+		bool bFromSweep, const FHitResult& SweepResult);
 };

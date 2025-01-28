@@ -42,12 +42,11 @@ public:
 	float h;
 	float v;
 
-	void OnHorizontal(float vale);
-	void OnVertical(float value);
+	void OnAxisHorizontal(float vale);
+	void OnAxisVertical(float value);
 
 	void OnActionFire();
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ABulletActor> BulletFactory; // ¾ê ¹¹Áö
-
 };

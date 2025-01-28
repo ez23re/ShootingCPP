@@ -19,8 +19,33 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// EndPlay
+	virtual void EndPlay(const EEndPlayReason::Type EEndPlayReason) override;
+
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float CurrentTime = 0.0f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float MakeTime = 1.0f;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AEnemyActor> EnemyFactory;
+
+	UPROPERTY(EditAnywhere)
+	class USceneComponent* RootComp;
+
+	UPROPERTY(EditAnywhere)
+	class UArrowComponent* Origin;
+
+
+	void MakeEnemy();
+	
+
+	FTimerHandle Handle;
 };
