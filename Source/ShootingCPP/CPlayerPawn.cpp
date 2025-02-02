@@ -16,7 +16,7 @@ ACPlayerPawn::ACPlayerPawn()
 	MeshComp->SetupAttachment(BoxComp);
 
 	FirePosition = CreateDefaultSubobject<UArrowComponent>(TEXT("FirePosition"));
-	FirePosition->SetupAttachment(RootComponent);
+	FirePosition->SetupAttachment(BoxComp);
 	FirePosition->SetRelativeLocationAndRotation(FVector(0, 0, 100), FRotator(90, 0, 0));
 
 	BoxComp->SetCollisionProfileName(FName("Player"));
@@ -43,12 +43,12 @@ void ACPlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis(TEXT("Horizontal"), this, &ACPlayerPawn::Onhorizontal);
+	PlayerInputComponent->BindAxis(TEXT("Horizontal"), this, &ACPlayerPawn::OnHorizontal);
 	PlayerInputComponent->BindAxis(TEXT("Vertical"), this, &ACPlayerPawn::OnVertical);
 	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ACPlayerPawn::OnFire);
 }
 
-void ACPlayerPawn::Onhorizontal(float value)
+void ACPlayerPawn::OnHorizontal(float value)
 {
 	h = value;
 }
@@ -60,6 +60,6 @@ void ACPlayerPawn::OnVertical(float value)
 
 void ACPlayerPawn::OnFire()
 {
-	FTransform FirePos = FirePosition->GetComponentTransform(); // 이게 머지
-	GetWorld()->SpawnActor<ACBullet>(BulletFactory, FirePos);
+	FTransform EnemyPos = FirePosition->GetComponentTransform();
+	GetWorld()->SpawnActor<ACBullet>(BulletFactory, EnemyPos);
 }
