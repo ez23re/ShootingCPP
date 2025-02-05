@@ -14,15 +14,15 @@ ACBullet::ACBullet()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetupAttachment(BoxComp);
 
+	
 	BoxComp->SetCollisionProfileName(FName("Bullet"));
 	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &ACBullet::OnBulletOverlap);
-
 }
 
 void ACBullet::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void ACBullet::Tick(float DeltaTime)
@@ -30,8 +30,7 @@ void ACBullet::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FVector p0 = GetActorLocation();
-	FVector dir = GetActorForwardVector();
-	SetActorLocation(p0 + dir * Speed * DeltaTime);
+	SetActorLocation(p0 + GetActorForwardVector() * Speed * DeltaTime);
 }
 
 void ACBullet::OnBulletOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

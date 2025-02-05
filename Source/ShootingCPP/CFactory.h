@@ -19,15 +19,13 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UArrowComponent* EnemyPosition;
 
-	float CurTime = 0.0f;
-	float DelTime = 2.0f;
+	float cur = 0.f;
+	float del = 2.f;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	TSubclassOf<class ACEnemy> Enemy;
-
-	void MakeEnemy();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class ACEnemy> EnemyFactory;
 
 };

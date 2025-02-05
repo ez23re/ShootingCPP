@@ -60,6 +60,6 @@ void ACPlayerPawn::OnVertical(float value)
 
 void ACPlayerPawn::OnFire()
 {
-	FTransform EnemyPos = FirePosition->GetComponentTransform();
-	GetWorld()->SpawnActor<ACBullet>(BulletFactory, EnemyPos);
+	FTransform FirePos = FirePosition->GetComponentTransform();
+	GetWorld()->SpawnActor<ACBullet>(BulletFactory, FirePos);
 }

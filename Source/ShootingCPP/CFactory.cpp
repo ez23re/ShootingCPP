@@ -1,10 +1,9 @@
 #include "CFactory.h"
 #include "Components/ArrowComponent.h"
-#include "CEnemy.h"
 
 ACFactory::ACFactory()
 {
-	PrimaryActorTick.bCanEverTick = true;	
+	PrimaryActorTick.bCanEverTick = true;
 
 	EnemyPosition = CreateDefaultSubobject<UArrowComponent>(TEXT("EnemyPosition"));
 	EnemyPosition->SetupAttachment(RootComponent);
@@ -14,22 +13,16 @@ ACFactory::ACFactory()
 void ACFactory::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void ACFactory::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	CurTime += DeltaTime;
-	if (CurTime >= DelTime) {
-		MakeEnemy();
-		CurTime = 0.0f;
+	cur += DeltaTime;
+	if (cur >= del) {
+		FTransform EnemyPos = EnemyPosition->GetComponentTransform();
+		GetWorld()->SpawnActor<ACEnemy>(EnemyFactory, EnemyPos);
+		cur = 0.f;
 	}
-}
-
-void ACFactory::MakeEnemy()
-{
-	FTransform EnemyPos = EnemyPosition->GetComponentTransform();
-	GetWorld()->SpawnActor<ACEnemy>(Enemy, EnemyPos);
 }
