@@ -18,15 +18,13 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UBoxComponent* BoxComp;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UStaticMeshComponent* MeshComp;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Speed = 700.f;
-
 	FVector dir;
 
 	UFUNCTION()

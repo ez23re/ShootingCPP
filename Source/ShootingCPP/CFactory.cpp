@@ -5,7 +5,7 @@ ACFactory::ACFactory()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	EnemyPosition = CreateDefaultSubobject<UArrowComponent>(TEXT("EnemyPosition"));
+	EnemyPosition = CreateDefaultSubobject<UArrowComponent>("EnemyPosition");
 	EnemyPosition->SetupAttachment(RootComponent);
 	EnemyPosition->SetRelativeLocationAndRotation(FVector(0, 0, 100), FRotator(-90, 0, 0));
 }
@@ -13,7 +13,7 @@ ACFactory::ACFactory()
 void ACFactory::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 }
 
 void ACFactory::Tick(float DeltaTime)

@@ -2,20 +2,19 @@
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/ArrowComponent.h"
-#include "CBullet.h"
 
 ACPlayerPawn::ACPlayerPawn()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
+	BoxComp = CreateDefaultSubobject<UBoxComponent>("BoxComp");
 	BoxComp->SetBoxExtent(FVector(50));
 	SetRootComponent(BoxComp);
 
-	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>("MeshComp");
 	MeshComp->SetupAttachment(BoxComp);
 
-	FirePosition = CreateDefaultSubobject<UArrowComponent>(TEXT("FirePosition"));
+	FirePosition = CreateDefaultSubobject<UArrowComponent>("FirePosition");
 	FirePosition->SetupAttachment(BoxComp);
 	FirePosition->SetRelativeLocationAndRotation(FVector(0, 0, 100), FRotator(90, 0, 0));
 
@@ -33,10 +32,7 @@ void ACPlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FVector p0 = GetActorLocation();
-	FVector dir = FVector(0, h, v);
-	dir.Normalize();
-	SetActorLocation(p0 + dir * Speed * DeltaTime);
+	SetActorLocation(GetActorLocation() + Speed * DeltaTime * (FVector(0, h, v)).GetSafeNormal());
 }
 
 void ACPlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

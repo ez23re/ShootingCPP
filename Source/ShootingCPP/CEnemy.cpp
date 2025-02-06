@@ -5,7 +5,7 @@
 
 ACEnemy::ACEnemy()
 {
- 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true;
 	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
 	BoxComp->SetBoxExtent(FVector(50));
 	SetRootComponent(BoxComp);
@@ -22,23 +22,24 @@ void ACEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	float rand = FMath::RandRange(1, 100);
-	if (rand <= 30) {
+	if (rand <= 60) {
 		auto* player = GetWorld()->GetFirstPlayerController()->GetPawn();
 		if (player) {
 			dir = player->GetActorLocation() - this->GetActorLocation();
+			dir.Normalize();
 		}
 	}
 	else {
 		dir = GetActorForwardVector();
 	}
-} 
+}
 
 void ACEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 	FVector p0 = GetActorLocation();
-	SetActorLocation(p0 + dir.GetSafeNormal() * Speed * DeltaTime);
+	SetActorLocation(p0 + dir * Speed * DeltaTime);
 }
 
 void ACEnemy::OnEnemyOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

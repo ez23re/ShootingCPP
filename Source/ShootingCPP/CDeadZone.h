@@ -18,9 +18,9 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UBoxComponent* BoxComp;
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UStaticMeshComponent* MeshComp;
 

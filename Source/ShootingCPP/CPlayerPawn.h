@@ -21,26 +21,25 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 public:
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UBoxComponent* BoxComp;
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UStaticMeshComponent* MeshComp;
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UArrowComponent* FirePosition;
+	
+		
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Speed = 500.f;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	float Speed = 500.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class ACBullet> BulletFactory;
 
 	float h;
 	float v;
 
 	void OnHorizontal(float value);
 	void OnVertical(float value);
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	TSubclassOf<class ACBullet> BulletFactory;
-
 	void OnFire();
 };

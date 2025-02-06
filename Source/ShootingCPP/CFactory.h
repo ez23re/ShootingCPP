@@ -21,11 +21,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UArrowComponent* EnemyPosition;
-
+	
 	float cur = 0.f;
 	float del = 2.f;
-
+		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<class ACEnemy> EnemyFactory;
-
 };
